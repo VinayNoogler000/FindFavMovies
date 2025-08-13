@@ -1,13 +1,11 @@
-import MovieImage from "./MovieImage";
-import FavButton from "./FavButton";
+import MoviePoster from "./MoviePoster";
+import MovieInfo from "./MovieInfo";
 
 export default function MovieCard({ movie }) {
     return (
         <div className="movie-card">
-            <MovieImage imgUrl={ movie.imgUrl } movieTitle={ movie.title } />
-            <h3 className="movie-title">{ movie.title }</h3>
-            <p className="movie-date"> { movie.releaseDate } </p>
-            <FavButton />
+            <MoviePoster imgUrl={ movie.imgUrl } title={ movie.title } />
+            <MovieInfo title={ movie.title } date={ movie.releaseDate } />
         </div>
     );
 }
