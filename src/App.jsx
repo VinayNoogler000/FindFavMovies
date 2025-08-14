@@ -1,14 +1,17 @@
 import './App.css'
-import MovieCard from "./components/MovieCard";
+import Home from './pages/home';
+import Favorites from './pages/Favorites';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const movie = {
-    imgUrl: "https://media.themoviedb.org/t/p/w220_and_h330_face/jT8sUpBrqgQpHWuUukpAmWdyJzD.jpg",
-    title: "Alien Earth",
-    releaseDate: "Aug 12, 2025"
-  }
-
-  return <MovieCard movie={movie} />
+  return (
+    <main className="main-content">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
+    </main>
+  );
 }
 
 export default App
