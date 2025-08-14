@@ -53,6 +53,12 @@
   }
 }
 
+@media (max-width: 450px) {
+  .search-form {
+    padding: 0;
+  }
+}
+
 .movies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
