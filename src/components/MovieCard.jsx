@@ -1,3 +1,4 @@
+import "../css/MovieCard.css";
 import MoviePoster from "./MoviePoster";
 import MovieInfo from "./MovieInfo";
 

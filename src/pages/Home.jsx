@@ -1,3 +1,4 @@
+import "../css/Home.css";
 import SearchContent from "../components/SearchContent";
 import MoviesGrid from "../components/MoviesGrid";
 import { useState } from "react";

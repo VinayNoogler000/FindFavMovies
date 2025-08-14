@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import NavBar from "./components/NavBar";
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
@@ -10,7 +10,7 @@ function App() {
       <header>
         <NavBar />
       </header>
-    
+
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
