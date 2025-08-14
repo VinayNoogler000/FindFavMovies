@@ -11,8 +11,7 @@ export default function FavButton() {
     }
 
     return (
-        <button className="fav-btn" title="Add To Favorites" onClick={toggleLikeStatus} > 
-        {/*  absolute right-2 top-2 px-2 py-1.5 rounded-full */}
+        <button className="favorite-btn" title="Add To Favorites" onClick={toggleLikeStatus} > 
             <FontAwesomeIcon icon={ isLiked ? solidHeart : regularHeart } color="red" />
         </button>
     );
