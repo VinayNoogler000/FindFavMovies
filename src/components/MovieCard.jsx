@@ -5,8 +5,8 @@ import MovieInfo from "./MovieInfo";
 export default function MovieCard({ movie }) {
     return (
         <div className="movie-card">
-            <MoviePoster imgUrl={ movie.imgUrl } title={ movie.title } />
-            <MovieInfo title={ movie.title } date={ movie.releaseDate } />
+            <MoviePoster imgUrl={ movie.poster_path } title={ movie.title } />
+            <MovieInfo title={ movie.title } date={ movie.release_date } />
         </div>
     );
 }

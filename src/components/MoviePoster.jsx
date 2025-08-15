@@ -1,9 +1,9 @@
 import FavButton from "./FavButton";
 
-export default function MoviePoster({ imgUrl, movieTitle }) {
+export default function MoviePoster({ imgUrl, title }) {
     return (
         <div className="movie-poster">
-            <img src={imgUrl} className="movie-img" alt={movieTitle + "image"} loading="lazy"></img>
+            <img src={`https://image.tmdb.org/t/p/w500${imgUrl}`} className="movie-img" alt={`${title} image`} loading="lazy"></img>
             
             <div className="movie-overlay">
                 <FavButton />
