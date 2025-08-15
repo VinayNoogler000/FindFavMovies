@@ -1,10 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass as faSearch } from '@fortawesome/free-solid-svg-icons';
+import { searchMovies } from '../services/api';
 
-export default function SearchContent({ searchQuery, setSearchQuery }) {
-    const handleSearch = (event) => {
+export default function SearchContent({ searchQuery, setSearchQuery, isLoading, setLoading, setMovies }) {
+    const handleSearch = async (event) => {
         event.preventDefault();
-        console.log(searchQuery);
+        
+        if (searchQuery.trim() === "" || isLoading === true) return;
+        else {
+            setLoading(true);
+            
+            try {
+                const movies = await searchMovies(searchQuery);
+                setMovies(movies);
+            }
+            catch(err) {
+                setError("Failed to Search Movies! Please try again later...");
+                console.log(err);
+            }
+            finally {
+                setSearchQuery("");
+                setLoading(false);
+            }
+        }
     }
 
     return (

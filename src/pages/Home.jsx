@@ -18,7 +18,7 @@ export default function Home() {
             }
             catch (err) {
                 console.log(err);
-                setError("Error in Loading Popular Movies...!");
+                setError("Failed to Load Popular Movies! Please try again later...");
             }
             finally {
                 setLoading(false);
@@ -30,7 +30,7 @@ export default function Home() {
 
     return (
         <div className="home-page">
-            <SearchContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <SearchContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} isLoading={loading} setLoading={setLoading} setMovies={setMovies} />
 
             { error && <div className="error-msg"> {error} </div> }
 
