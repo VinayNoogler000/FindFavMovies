@@ -9,6 +9,7 @@ export default function Home() {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+
     useEffect( () => {
         const loadPopularMovies = async () => {
             try {
@@ -30,7 +31,10 @@ export default function Home() {
     return (
         <div className="home-page">
             <SearchContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-            <MoviesGrid movies={movies} />
+
+            { error && <div className="error-msg"> {error} </div> }
+
+            { loading ? <div className="loading">Loading...</div> : <MoviesGrid movies={movies} /> }
         </div>
     );
 }
