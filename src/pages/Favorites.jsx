@@ -5,6 +5,7 @@ export default function Favorites() {
         <div className="favorites-empty">
             <h3>No Favorite Movies Yet</h3>
             <p>Start adding your favorite movies and they'll appear here!</p>
+            <h4>[NOTE] This Feature is Under Development. So Stay Tuned!</h4>
         </div>
     );
 }
