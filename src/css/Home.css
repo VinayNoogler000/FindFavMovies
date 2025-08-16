@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.loading {
+  text-align: center;
+}
+
 .search-form {
   max-width: 600px;
   margin: 0 auto 2rem;

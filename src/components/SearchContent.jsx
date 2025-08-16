@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass as faSearch } from '@fortawesome/free-solid-svg-icons';
 import { searchMovies } from '../services/api';
 
-export default function SearchContent({ searchQuery, setSearchQuery, isLoading, setLoading, setMovies }) {
+export default function SearchContent({ isLoading, setLoading, setMovies }) {
+    const [searchQuery, setSearchQuery] = useState("");
+
     const handleSearch = async (event) => {
         event.preventDefault();
         
@@ -28,6 +31,7 @@ export default function SearchContent({ searchQuery, setSearchQuery, isLoading, 
     return (
         <form className="search-form" onSubmit={handleSearch}>
             <input type="text" className="search-input" placeholder="Search for movies/shows..." name="content" value={searchQuery} onChange={ (e) => setSearchQuery(e.target.value) } required></input>
+            
             <button type="submit" title="Search Movies/Shows" className="search-button"> 
                 <FontAwesomeIcon icon={faSearch} /> 
             </button> 
