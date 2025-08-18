@@ -28,9 +28,3 @@
 .movies-grid > * {
   animation: fadeIn 0.3s ease-out forwards;
 }
-
-@media (min-width: 1370px) {
-  /* .movies-grid {
-    width: fit-content;
-  } */
-}
