@@ -5,7 +5,8 @@
   background-color: #1a1a1a;
   transition: transform 0.2s;
   height: 100%;
-  max-width: 23.75rem;
+  width: 100%;
+  max-width: 23.75rem; /* 380px */
   display: flex;
   flex-direction: column;
 }
@@ -43,6 +44,12 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 1rem;
+}
+
+@media  (max-width: 768px) {
+  .movie-overlay {
+    opacity: 1;
+  }
 }
 
 .movie-card:hover .movie-overlay {
