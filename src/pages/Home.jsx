@@ -29,6 +29,7 @@ export default function Home() {
     return (
         <div className="home-page">
             <SearchContent isLoading={loading} setLoading={setLoading} setMovies={setMovies} />
+            <h2>Popular Movies</h2>
 
             { error && <div className="error-msg"> {error} </div> }
 
