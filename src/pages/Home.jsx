@@ -2,7 +2,7 @@ import "../css/Home.css";
 import SearchContent from "../components/SearchContent";
 import MoviesGrid from "../components/MoviesGrid";
 import { useState, useEffect } from "react";
-import { getPopularMovies, searchMovies } from "../services/api";
+import { getPopularMovies } from "../services/api";
 
 export default function Home() {
     const [movies, setMovies] = useState([]);
