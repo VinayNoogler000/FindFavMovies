@@ -4,28 +4,76 @@ const MovieContext = createContext();
 
 export const useMovieContext = () => useContext(MovieContext);
 
-export const MovieProvider = ({children}) => {
+export const MovieProvider = ({ children }) => {
     // 👇 Initialize the "favorites" state-var with fav-movies-list stored in the Local-Storage (if exists), else with initialize it with an empty array. 
-    const [favorites, setFavorites] = useState( localStorage.getItem("favorites") == "undefined" || localStorage.getItem("favorites") == "null" ? [] : JSON.parse(localStorage.getItem("favorites")) );
+    const [favorites, setFavorites] = useState(() => {
+        try {
+            const storedFavs = localStorage.getItem("favorites");
+            if (!storedFavs) {
+                return [];
+            }
+            const parsedFavs = JSON.parse(storedFavs);
+            // Ensure the parsed data is an array
+            return Array.isArray(parsedFavs) ? parsedFavs : [];
+        } catch (error) {
+            console.warn('Error parsing favorites from localStorage:', error);
+            // Clear invalid data from localStorage
+            localStorage.removeItem("favorites");
+            return [];
+        }
+    });
 
     //👇 Side-Effect/Callback to Update the Favorites-Movies-List stored in the Local-Storage, everytime the 
     //👇 "favorites" state changes, whether on adding or removing a movie to/from the favorites list.
-    useEffect( () => {
+    useEffect(() => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
     const addToFavs = (movie) => {
-        setFavorites( (prevFavs) => [...prevFavs, movie] );
+        // Ensure movie has a valid ID before adding
+        if (!movie || (movie.id === undefined && movie.id !== 0)) {
+            console.warn('Cannot add movie to favorites: Invalid movie object or missing ID');
+            return;
+        }
+        setFavorites((prevFavs) => {
+            // Ensure prevFavs is an array before spreading
+            const currentFavs = Array.isArray(prevFavs) ? prevFavs : [];
+            return [...currentFavs, movie];
+        });
     }
 
     const removeFromFavs = (movieId) => {
-        setFavorites( (prevFavs) => {
-            return prevFavs.filter( (favMovie) => favMovie.id !== movieId);
+        // Handle cases where movieId is undefined, null, or invalid
+        if (!movieId && movieId !== 0) {
+            return;
+        }
+        setFavorites((prevFavs) => {
+            // Ensure prevFavs is an array before calling .filter()
+            if (!Array.isArray(prevFavs)) {
+                return [];
+            }
+            return prevFavs.filter((favMovie) => {
+                // Ensure both IDs exist and are of the same type for comparison
+                return !(favMovie && favMovie.id !== undefined && favMovie.id !== null &&
+                    String(favMovie.id) === String(movieId));
+            });
         });
     }
 
     const isFavorite = (movieId) => {
-        return favorites.some( (favMovie) => favMovie.id === movieId);
+        // Handle cases where movieId is undefined, null, or invalid
+        if (!movieId && movieId !== 0) {
+            return false;
+        }
+        // Ensure favorites is an array before calling .some()
+        if (!Array.isArray(favorites)) {
+            return false;
+        }
+        return favorites.some((favMovie) => {
+            // Ensure both IDs exist and are of the same type for comparison
+            return favMovie && favMovie.id !== undefined && favMovie.id !== null &&
+                String(favMovie.id) === String(movieId);
+        });
     }
 
     const value = {
