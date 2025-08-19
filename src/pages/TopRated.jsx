@@ -1,0 +1,42 @@
+import "../css/TopRated.css";
+import { useState, useEffect } from "react";
+import { getTopRatedMovies } from "../services/api";
+import SearchContent from "../components/SearchContent";
+import MoviesGrid from "../components/MoviesGrid";
+
+export default function TopRated() {
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        // IIFE (Immediately Invoked Function Expression) to Load Now-Playing Movies from TheMovieDB API, immediately on Page Load.
+        (async () => {
+            try {
+                const topRatedMovies = await getTopRatedMovies();
+                if (topRatedMovies) setMovies(topRatedMovies);
+                else throw err;
+            } 
+            catch (err) {
+                setError("Failed to Load Top Rated Movies! Please try again later...");
+                console.log(err);
+            }
+            finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
+    return (
+            <div className="top-rated-page">
+                <SearchContent isLoading={loading} setLoading={setLoading} setMovies={setMovies} />
+
+                <h2>Top Rated Movies</h2>
+
+                { error && <div className="error-msg"> {error} </div> }
+
+                { loading ? <div className="loading">Loading...</div> : <MoviesGrid movies={movies} /> }
+            </div>
+            
+        );
+}

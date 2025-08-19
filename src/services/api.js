@@ -35,3 +35,25 @@ export const getNowPlayingMovies = async (query) => {
         console.log("Error in Getting the Now Playing Movies in Theatres, from the API", error);
     }
 }
+
+export const getTopRatedMovies = async (query) => {
+    const url = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&region=IN`;
+
+    try {
+        const response = await axios.get(url);
+        return response.data.results; // top rated movies list
+    } catch (error) {
+        console.log("Error in Getting the Top Rated Movies from the API", error);
+    }
+}
+
+export const getUpcomingMovies = async (query) => {
+    const url = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&region=IN`;
+
+    try {
+        const response = await axios.get(url);
+        return response.data.results; // upcoming movies list
+    } catch (error) {
+        console.log("Error in Getting the Upcoming Movies from the API", error);
+    }
+}

@@ -11,9 +11,23 @@ export default function NavBar() {
     });
 
     const toggleNavMenu = () => {
-        console.log("menu toggled");
         const navMenu = document.querySelector(".nav-menu");
-        navMenu.style.top = navMenu.style.top === "-105px" ? "60px" : "-105px";
+
+        let showPosition;
+        if (viewportWidth <= 450) {
+                showPosition = "61px";
+        }
+        else if (viewportWidth > 450 && viewportWidth <= 576) {
+            showPosition = "64px";
+        }
+        else if (viewportWidth <= 768) {
+            showPosition = "64px";
+        }
+        else {
+            showPosition = "68px";
+        }
+
+        navMenu.style.top = navMenu.style.top === "-105px" ? showPosition : "-105px";
     }
 
     return (
@@ -27,8 +41,12 @@ export default function NavBar() {
             <div className="navbar-links">
                 <Link to="/" className="nav-link" title="Popular Movies"> Popular </Link>
                 <Link to="/favorites" className="nav-link" title="Your Favorite Movies"> Favorites </Link>
-                { viewportWidth > 576 ?  
-                    <Link to="/now-playing" className="nav-link" title="Movies Now Playing in Theatres"> Now Playing </ Link>
+                { viewportWidth >= 820 ?  
+                    <>
+                        <Link to="/now-playing" className="nav-link" title="Movies Now Playing in Theatres"> Now Playing </ Link>
+                        <Link to="/top-rated" className="nav-link" title="Top Rated Movies"> Top Rated </ Link>
+                        <Link to="/upcoming" className="nav-link" title="Upcoming Movies"> Upcoming </ Link>
+                    </>
                 : 
                 <button className="menu-btn" title="Show Navigation Menu" onClick={toggleNavMenu}>
                     <FontAwesomeIcon icon={faSquareCaretDown} />
@@ -37,11 +55,11 @@ export default function NavBar() {
             </div>
         </nav>
         
-        { viewportWidth < 576 && 
+        { viewportWidth < 820 && 
         <div className="nav-menu">
             <Link to="/now-playing" className="nav-link" title="Movies Now Playing in Theatres"> Now Playing </ Link>
-            {/* <Link to="/now-playing" className="nav-link" title="Movies Now Playing in Theatres"> Now Playing </ Link>
-            <Link to="/now-playing" className="nav-link" title="Movies Now Playing in Theatres"> Now Playing </ Link> */}
+            <Link to="/top-rated" className="nav-link" title="Top Rated Movies"> Top Rated </ Link>
+            <Link to="/upcoming" className="nav-link" title="Upcoming Movies"> Upcoming </ Link>
         </div>
         }
         </>
