@@ -13,12 +13,10 @@ export const MovieProvider = ({ children }) => {
                 return [];
             }
             const parsedFavs = JSON.parse(storedFavs);
-            // Ensure the parsed data is an array
-            return Array.isArray(parsedFavs) ? parsedFavs : [];
+            return Array.isArray(parsedFavs) ? parsedFavs : []; // Ensure the parsed data is an array
         } catch (error) {
             console.warn('Error parsing favorites from localStorage:', error);
-            // Clear invalid data from localStorage
-            localStorage.removeItem("favorites");
+            localStorage.removeItem("favorites"); // Clear invalid data from localStorage
             return [];
         }
     });
@@ -36,8 +34,7 @@ export const MovieProvider = ({ children }) => {
             return;
         }
         setFavorites((prevFavs) => {
-            // Ensure prevFavs is an array before spreading
-            const currentFavs = Array.isArray(prevFavs) ? prevFavs : [];
+            const currentFavs = Array.isArray(prevFavs) ? prevFavs : []; // Ensure prevFavs is an array before spreading
             return [...currentFavs, movie];
         });
     }
@@ -49,13 +46,10 @@ export const MovieProvider = ({ children }) => {
         }
         setFavorites((prevFavs) => {
             // Ensure prevFavs is an array before calling .filter()
-            if (!Array.isArray(prevFavs)) {
-                return [];
-            }
-            return prevFavs.filter((favMovie) => {
+            const currentFavs = Array.isArray(prevFavs) ? prevFavs : [];
+            return currentFavs.filter((favMovie) => {
                 // Ensure both IDs exist and are of the same type for comparison
-                return !(favMovie && favMovie.id !== undefined && favMovie.id !== null &&
-                    String(favMovie.id) === String(movieId));
+                return (favMovie && (favMovie.id !== undefined) && (favMovie.id !== null) && (String(favMovie.id) !== String(movieId)));
             });
         });
     }
@@ -71,8 +65,7 @@ export const MovieProvider = ({ children }) => {
         }
         return favorites.some((favMovie) => {
             // Ensure both IDs exist and are of the same type for comparison
-            return favMovie && favMovie.id !== undefined && favMovie.id !== null &&
-                String(favMovie.id) === String(movieId);
+            return (favMovie && (favMovie.id !== undefined) && (favMovie.id !== null) && (String(favMovie.id) === String(movieId)));
         });
     }
 
