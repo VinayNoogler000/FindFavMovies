@@ -7,26 +7,31 @@ import Favorites from './pages/Favorites';
 import NowPlaying from './pages/NowPlaying';
 import TopRated from './pages/TopRated';
 import Upcoming from './pages/Upcoming';
+import Footer from './components/Footer';
 
 function App() {
   const location = useLocation();
 
   return (
-    <MovieProvider>
+    <>
       <header>
         <NavBar />
       </header>
 
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Popular key={location.key} />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/now-playing" element={<NowPlaying key={location.key} />} />
-          <Route path="/top-rated" element={<TopRated key={location.key} />} />
-          <Route path="/upcoming" element={<Upcoming key={location.key} />} />
-        </Routes>
-      </main>
-    </MovieProvider>
+      <MovieProvider>
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Popular key={location.key} />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/now-playing" element={<NowPlaying key={location.key} />} />
+            <Route path="/top-rated" element={<TopRated key={location.key} />} />
+            <Route path="/upcoming" element={<Upcoming key={location.key} />} />
+          </Routes>
+        </main>
+      </MovieProvider>
+
+      <Footer/>
+    </>
   );
 }
 
