@@ -1,4 +1,4 @@
-import "../css/Home.css";
+import "../css/Popular.css";
 import SearchContent from "../components/SearchContent";
 import MoviesGrid from "../components/MoviesGrid";
 import { useState, useEffect } from "react";
@@ -14,11 +14,12 @@ export default function Home() {
         (async () => {
             try {
                 const popularMovies = await getPopularMovies();
-                setMovies(popularMovies);
+                if (popularMovies) setMovies(popularMovies);
+                else throw err;
             }
             catch (err) {
-                console.log(err);
                 setError("Failed to Load Popular Movies! Please try again later...");
+                console.log(err);
             }
             finally {
                 setLoading(false);
@@ -27,8 +28,9 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="home-page">
+        <div className="popular-page">
             <SearchContent isLoading={loading} setLoading={setLoading} setMovies={setMovies} />
+            
             <h2>Popular Movies</h2>
 
             { error && <div className="error-msg"> {error} </div> }
