@@ -8,3 +8,4 @@ This is a personal project by a passionate web developer - Vinay Tambey, created
 2. **UseEffect() Hook**: Understood the importance of the useEffect() hook by invoking the data fetching upon an initial render of the component, and upon changes to specific state variables triggering re-renders.
 3. **React Context API**: Explored & utilized the React Context API for making global state management easier, allowing for seamless data sharing between components without prop drilling.
 4. **UseLocation() Hook**: Leveraged the useLocation() hook for refreshing the page in a SPA-friendly way upon every user interaction, by utilizing the location object, and resetting the state, without full-page reload, following React best practices.
+5. **Error Handling**: Implemented error handling mechanisms to manage corner-cases, ensuring a smoother user experience and preventing application crashes.
